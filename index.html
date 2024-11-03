@@ -29,6 +29,9 @@
             --code-red: #D84315; /* Burnt Orange */
             --code-yellow: #F9A825; /* Mustard Yellow */
             --faint-text: rgba(250, 250, 250, 0.4); /* Soft White with transparency */
+            /* Additional Colors for New Icons */
+            --accent-brown: #8B4513; /* Saddle Brown for Chestnut */
+            --accent-purple: #6A0DAD; /* Optional: For Halloween-themed icons */
         }
 
         /* Reset and Base Styles */
@@ -1961,41 +1964,58 @@
             });
         }
 
-        // Function to generate random star shapes
-        function generateRandomStar() {
-            const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
-            return stars[Math.floor(Math.random() * stars.length)];
+        // Function to generate random fall-themed icons (stars, orange hearts, leaves, turkey, mushroom, chestnut)
+        function generateRandomIcon() {
+            const icons = [
+                '★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯', // Star Symbols
+                '🧡', '🍁', '🍂', '🦃', '🍄', '🌰' // Fall Symbols: Orange Heart, Maple Leaf, Fallen Leaf, Turkey, Mushroom, Chestnut
+            ];
+            return icons[Math.floor(Math.random() * icons.length)];
         }
 
-        // Function to display multiple random stars with random color
-        function displayRandomJapaneseChars(count = 4) { // Increased count from 2 to 4
+        // Function to display multiple random icons with appropriate styling
+        function displayRandomIcons(count = 4) {
             const darkSection = document.querySelector('.dark-theme-section');
-            const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
+            const allIcons = [
+                '★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯',
+                '🧡', '🍁', '🍂', '🦃', '🍄', '🌰'
+            ];
 
             for(let i = 0; i < count; i++) {
-                const star = stars[Math.floor(Math.random() * stars.length)];
-                const randomStarElem = document.createElement('span');
-                randomStarElem.className = 'random-char';
+                const iconType = allIcons[Math.floor(Math.random() * allIcons.length)];
+                const randomIconElem = document.createElement('span');
+                randomIconElem.className = 'random-icon';
 
-                // Randomly assign one of the three colors
-                const colors = ['white', 'red', 'yellow'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                randomStarElem.classList.add(randomColor);
+                // Assign classes based on icon type for styling
+                if (iconType === '🧡') {
+                    randomIconElem.classList.add('orange-heart');
+                } else if (['🍁', '🍂'].includes(iconType)) {
+                    randomIconElem.classList.add('leaf');
+                } else if (iconType === '🦃') {
+                    randomIconElem.classList.add('turkey');
+                } else if (iconType === '🍄') {
+                    randomIconElem.classList.add('mushroom');
+                } else if (iconType === '🌰') {
+                    randomIconElem.classList.add('chestnut');
+                } else {
+                    randomIconElem.classList.add('star'); // Default for stars
+                }
 
-                randomStarElem.textContent = star;
+                randomIconElem.textContent = iconType;
+                randomIconElem.setAttribute('aria-hidden', 'true'); // Accessibility
 
                 // Random position within the dark-theme-section
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
 
-                randomStarElem.style.left = `${x}%`;
-                randomStarElem.style.top = `${y}%`;
+                randomIconElem.style.left = `${x}%`;
+                randomIconElem.style.top = `${y}%`;
 
-                darkSection.appendChild(randomStarElem);
+                darkSection.appendChild(randomIconElem);
 
-                // Remove the star after animation completes
-                randomStarElem.addEventListener('animationend', () => {
-                    randomStarElem.remove();
+                // Remove the icon after animation completes
+                randomIconElem.addEventListener('animationend', () => {
+                    randomIconElem.remove();
                 });
             }
         }
@@ -2073,8 +2093,8 @@
             // Initialize Particles
             startParticles();
 
-            // Start displaying random stars
-            setInterval(() => displayRandomJapaneseChars(4), 150); // Increased stars and frequency
+            // Start displaying random icons
+            setInterval(() => displayRandomIcons(4), 150); // Adjust count and frequency as needed
 
             // Window Resize Handler
             window.addEventListener('resize', () => {
