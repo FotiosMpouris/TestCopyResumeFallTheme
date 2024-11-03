@@ -29,9 +29,6 @@
             --code-red: #D84315; /* Burnt Orange */
             --code-yellow: #F9A825; /* Mustard Yellow */
             --faint-text: rgba(250, 250, 250, 0.4); /* Soft White with transparency */
-            /* Additional Colors for New Icons */
-            --accent-brown: #8B4513; /* Saddle Brown for Chestnut */
-            --accent-purple: #6A0DAD; /* Optional: For Halloween-themed icons */
         }
 
         /* Reset and Base Styles */
@@ -966,7 +963,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 60, 0, 0.2),
+                rgba(249, 168, 37, 0.2),
                 transparent
             );
             transition: 0.5s;
@@ -1329,51 +1326,32 @@
         /* Removed redundant keyframes */
 
         /* Added Styles for Random Japanese Characters */
-        /* Removed all .random-char styles */
-
-        /* Added Styles for Random Icon */
-        /* Base style for all random icons */
-        .random-icon {
+        .random-char {
             position: absolute;
-            font-size: 20px; /* Adjust size as needed */
+            font-size: 1.2rem;
             opacity: 0;
             pointer-events: none;
             user-select: none;
-            animation: fadeInOut 5s forwards;
-            z-index: 2;
+            animation: fadeInOut 2s forwards;
         }
 
-        /* Specific styles for different icon types */
-        .random-icon.star {
-            color: var(--accent-yellow); /* Mustard Yellow */
+        .random-char.white {
+            color: var(--code-white);
         }
 
-        .random-icon.orange-heart {
-            color: var(--accent-orange); /* Burnt Orange */
+        .random-char.red {
+            color: var(--code-red);
         }
 
-        .random-icon.leaf {
-            color: var(--accent-green); /* Olive Green */
+        .random-char.yellow {
+            color: var(--code-yellow);
         }
 
-        .random-icon.turkey {
-            color: var(--code-red); /* Burnt Orange */
-        }
-
-        .random-icon.mushroom {
-            color: var(--accent-brown); /* Saddle Brown */
-        }
-
-        .random-icon.chestnut {
-            color: var(--accent-brown); /* Saddle Brown */
-        }
-
-        /* Animation for fading in and out with movement */
         @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+            0% { opacity: 0; transform: translateY(0); }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(-20px) rotate(360deg); }
+            100% { opacity: 0; transform: translateY(-20px); }
         }
 
         /* Added Styles for Invisible Profile Trigger */
@@ -1399,6 +1377,102 @@
                 display: none;
             }
         }
+
+        /* Want to Know More Button Styles */
+        .want-know-more-btn {
+            display: none; /* Hidden initially */
+            margin-top: 1rem;
+            padding: 10px 20px;
+            background: rgba(216, 67, 21, 0.9); /* Burnt Orange with opacity */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .want-know-more-btn:hover {
+            background: rgba(249, 168, 37, 0.95); /* Mustard Yellow on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Animations */
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes matrixRain {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(100%); }
+        }
+
+        @keyframes fireFlow {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 200%; }
+        }
+
+        @keyframes holoGlow {
+            0% { 
+                opacity: 0.3;
+                transform: translateX(-100%) rotate(35deg);
+            }
+            100% { 
+                opacity: 0.7;
+                transform: translateX(200%) rotate(35deg);
+            }
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(10px) translateX(5px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.3; filter: blur(3px); }
+            100% { opacity: 1; filter: blur(1px); }
+        }
+
+        @keyframes titlePulse {
+            0% {
+                text-shadow: 
+                    0 0 10px rgba(249, 168, 37, 0.3),
+                    0 0 20px rgba(249, 168, 37, 0.2);
+            }
+            100% {
+                text-shadow: 
+                    0 0 15px rgba(249, 168, 37, 0.5),
+                    0 0 30px rgba(249, 168, 37, 0.3);
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Infographics Typing and Cycling */
+        /* Removed redundant keyframes */
     </style>
 </head>
 
@@ -1857,7 +1931,7 @@
                     currentItem.classList.remove('active');
                     currentItem.querySelector('h4').textContent = '';
                     currentItem.querySelector('.typing-text').textContent = '';
-                }, null);
+                });
             });
         }
 
@@ -1887,58 +1961,41 @@
             });
         }
 
-        // Function to generate random fall-themed icons (stars, orange hearts, leaves, turkey, mushroom, chestnut)
-        function generateRandomIcon() {
-            const icons = [
-                '★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯', // Star Symbols
-                '🧡', '🍁', '🍂', '🦃', '🍄', '🌰' // Fall Symbols: Orange Heart, Maple Leaf, Fallen Leaf, Turkey, Mushroom, Chestnut
-            ];
-            return icons[Math.floor(Math.random() * icons.length)];
+        // Function to generate random star shapes
+        function generateRandomStar() {
+            const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
+            return stars[Math.floor(Math.random() * stars.length)];
         }
 
-        // Function to display multiple random icons with appropriate styling
-        function displayRandomIcons(count = 4) {
+        // Function to display multiple random stars with random color
+        function displayRandomJapaneseChars(count = 4) { // Increased count from 2 to 4
             const darkSection = document.querySelector('.dark-theme-section');
-            const allIcons = [
-                '★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯',
-                '🧡', '🍁', '🍂', '🦃', '🍄', '🌰'
-            ];
+            const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
 
             for(let i = 0; i < count; i++) {
-                const iconType = allIcons[Math.floor(Math.random() * allIcons.length)];
-                const randomIconElem = document.createElement('span');
-                randomIconElem.className = 'random-icon';
+                const star = stars[Math.floor(Math.random() * stars.length)];
+                const randomStarElem = document.createElement('span');
+                randomStarElem.className = 'random-char';
 
-                // Assign classes based on icon type for styling
-                if (iconType === '🧡') {
-                    randomIconElem.classList.add('orange-heart');
-                } else if (['🍁', '🍂'].includes(iconType)) {
-                    randomIconElem.classList.add('leaf');
-                } else if (iconType === '🦃') {
-                    randomIconElem.classList.add('turkey');
-                } else if (iconType === '🍄') {
-                    randomIconElem.classList.add('mushroom');
-                } else if (iconType === '🌰') {
-                    randomIconElem.classList.add('chestnut');
-                } else {
-                    randomIconElem.classList.add('star'); // Default for stars
-                }
+                // Randomly assign one of the three colors
+                const colors = ['white', 'red', 'yellow'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                randomStarElem.classList.add(randomColor);
 
-                randomIconElem.textContent = iconType;
-                randomIconElem.setAttribute('aria-hidden', 'true'); // Accessibility
+                randomStarElem.textContent = star;
 
                 // Random position within the dark-theme-section
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
 
-                randomIconElem.style.left = `${x}%`;
-                randomIconElem.style.top = `${y}%`;
+                randomStarElem.style.left = `${x}%`;
+                randomStarElem.style.top = `${y}%`;
 
-                darkSection.appendChild(randomIconElem);
+                darkSection.appendChild(randomStarElem);
 
-                // Remove the icon after animation completes
-                randomIconElem.addEventListener('animationend', () => {
-                    randomIconElem.remove();
+                // Remove the star after animation completes
+                randomStarElem.addEventListener('animationend', () => {
+                    randomStarElem.remove();
                 });
             }
         }
@@ -2016,8 +2073,8 @@
             // Initialize Particles
             startParticles();
 
-            // Start displaying random icons
-            setInterval(() => displayRandomIcons(4), 150); // Adjust count and frequency as needed
+            // Start displaying random stars
+            setInterval(() => displayRandomJapaneseChars(4), 150); // Increased stars and frequency
 
             // Window Resize Handler
             window.addEventListener('resize', () => {
@@ -2116,3 +2173,5 @@
     </script>
 </body>
 </html>
+
+
