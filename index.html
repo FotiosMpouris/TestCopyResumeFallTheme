@@ -13,22 +13,22 @@
     <style>
         /* Core Variables */
         :root {
-            --primary-dark: #0a192f;
-            --primary-light: #20232a;
-            --accent-blue: #4169E1; /* Royal Blue */
-            --accent-light-blue: #1E90FF; /* Dodger Blue */
-            --accent-dark-blue: #0000CD; /* Medium Blue */
-            --accent-red: #FF0000; /* Consistent red */
-            --accent-glow: rgba(0, 170, 255, 0.6); /* Light blue glow */
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --matrix-color: rgba(0, 183, 255, 0.25);
-            --matrix-glow: rgba(0, 183, 255, 0.6); /* For anime effect */
+            --primary-dark: #2E1D0E; /* Deep Brown */
+            --primary-light: #4A2E16; /* Warm Brown */
+            --accent-orange: #D2691E; /* Chocolate */
+            --accent-light-orange: #FF8C00; /* Dark Orange */
+            --accent-dark-orange: #8B4513; /* Saddle Brown */
+            --accent-red: #B22222; /* Firebrick */
+            --accent-glow: rgba(255, 140, 0, 0.6); /* Light Orange Glow */
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --matrix-color: rgba(210, 105, 30, 0.25); /* Chocolate */
+            --matrix-glow: rgba(210, 105, 30, 0.6); /* For anime effect */
             --transition-standard: all 0.3s ease;
-            --infographic-bg: rgba(0, 123, 255, 0.3); /* Semi-transparent Blue */
-            --code-white: #ffffff;
-            --code-red: #ff0000;
-            --code-blue: #0000ff;
+            --infographic-bg: rgba(205, 92, 92, 0.3); /* Indian Red */
+            --code-white: #FFFFFF;
+            --code-red: #B22222;
+            --code-orange: #D2691E;
             --faint-text: rgba(255, 255, 255, 0.4); /* For "mouse hover" text */
         }
 
@@ -66,11 +66,11 @@
             height: 40px;
             cursor: pointer;
             transition: color 0.3s ease, transform 0.3s ease;
-            color: #ffffff; /* White */
+            color: #FFFFFF;
         }
 
         .github-icon:hover {
-            color: #ff0000; /* Red */
+            color: var(--accent-red);
             transform: scale(1.2);
         }
 
@@ -82,7 +82,7 @@
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
-            z-index: 1001; /* Above nav-links */
+            z-index: 1001;
         }
 
         .hamburger span {
@@ -97,13 +97,13 @@
         /* Navigation Links */
         .nav-links {
             list-style: none;
-            display: none; /* Hidden initially */
+            display: none;
             gap: 2rem;
             align-items: center;
         }
 
         .nav-links.active {
-            display: flex; /* Shown when active */
+            display: flex;
         }
 
         .nav-links li a {
@@ -114,7 +114,7 @@
         }
 
         .nav-links li a:hover {
-            color: var(--accent-blue);
+            color: var(--accent-light-orange);
         }
 
         /* Dropdown Menu Styles for Mobile and Desktop */
@@ -122,7 +122,7 @@
             .nav-links {
                 position: fixed;
                 right: 0;
-                top: 60px; /* Height of navbar */
+                top: 60px;
                 height: calc(100vh - 60px);
                 width: 200px;
                 background: var(--primary-dark);
@@ -161,7 +161,7 @@
         @media (min-width: 769px) {
             .nav-links {
                 position: absolute;
-                top: 60px; /* Height of navbar */
+                top: 60px;
                 right: 2rem;
                 background: transparent;
                 flex-direction: row;
@@ -203,7 +203,7 @@
             background: radial-gradient(
                 circle at center,
                 var(--accent-glow) 0%,
-                rgba(0, 123, 255, 0.15) 30%,
+                rgba(255, 140, 0, 0.15) 30%,
                 transparent 70%
             );
             animation: ripple 6s infinite;
@@ -238,18 +238,18 @@
 
         .matrix-column {
             position: absolute;
-            width: 30px; /* Increased width for fewer columns */
+            width: 30px;
             height: 100%;
             color: var(--matrix-color);
             font-family: 'Courier New', monospace;
             font-size: 16px;
-            line-height: 24px; /* Fixed line height */
-            white-space: pre-wrap; /* Allow wrapping */
+            line-height: 24px;
+            white-space: pre-wrap;
             word-wrap: break-word;
             background: linear-gradient(
                 0deg,
                 transparent,
-                rgba(255, 60, 0, 0.2) 50%,
+                rgba(255, 140, 0, 0.2) 50%,
                 transparent
             );
             background-size: 100% 200%;
@@ -257,7 +257,7 @@
                 matrixRain 20s linear infinite,
                 fireFlow 8s linear infinite;
             mix-blend-mode: screen;
-            z-index: 1; /* Ensure it's below popups */
+            z-index: 1;
         }
 
         .matrix-column::before {
@@ -277,7 +277,7 @@
             right: 0;
             bottom: 0;
             overflow: hidden;
-            z-index: 0; /* Behind the content */
+            z-index: 0;
             mask-image: linear-gradient(
                 to bottom,
                 transparent,
@@ -301,14 +301,14 @@
             color: var(--matrix-color);
             font-family: 'Courier New', monospace;
             font-size: 16px;
-            line-height: 24px; /* Fixed line height */
-            white-space: pre-wrap; /* Allow wrapping */
+            line-height: 24px;
+            white-space: pre-wrap;
             word-wrap: break-word;
             animation: animeRain 20s linear infinite;
             mix-blend-mode: screen;
             text-shadow: 0 0 8px var(--matrix-glow);
             opacity: 0.7;
-            z-index: 1; /* Below popups */
+            z-index: 1;
         }
 
         .anime-column.glow {
@@ -338,10 +338,10 @@
                 var(--primary-dark) 0%,
                 var(--primary-light) 100%
             );
-            overflow: visible; /* Changed from hidden to visible */
+            overflow: visible;
             color: var(--text-primary);
-            padding-top: 80px; /* Adjusted padding to prevent content from being hidden behind navbar */
-            z-index: 2; /* Ensure it's above background elements */
+            padding-top: 80px;
+            z-index: 2;
         }
 
         .hero::before {
@@ -349,10 +349,10 @@
             position: absolute;
             inset: 0;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(0,123,255,0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(0,123,255,0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(255,140,0,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255,140,0,0.1) 0%, transparent 50%);
             animation: glowPulse 8s ease-in-out infinite;
-            z-index: 1; /* Below content */
+            z-index: 1;
         }
 
         .container {
@@ -372,7 +372,7 @@
 
         .subtitle {
             font-size: 1.5rem;
-            color: var(--accent-blue);
+            color: var(--accent-orange);
             margin-bottom: 2rem;
             opacity: 0;
         }
@@ -387,13 +387,12 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            position: relative; /* To position popups absolutely */
-            z-index: 2; /* Ensure it's above background sections */
+            position: relative;
+            z-index: 2;
         }
 
         .skill-wrapper {
-            position: relative; /* Position relative to contain the absolute popup */
-            /* Removed z-index to prevent stacking context interference */
+            position: relative;
         }
 
         .skill-icon {
@@ -408,7 +407,7 @@
             transition: var(--transition-standard);
             cursor: pointer;
             position: relative;
-            z-index: 1; /* Lower than popup */
+            z-index: 1;
         }
 
         .skill-icon:hover {
@@ -425,12 +424,12 @@
 
         /* Popup Styles */
         .popup {
-            position: absolute; /* Positioned relative to .skill-wrapper */
-            top: 50%; /* Align vertically centered */
-            left: 100%; /* Position to the right of the skill icon */
+            position: absolute;
+            top: 50%;
+            left: 100%;
             transform: translateY(-50%);
             width: 250px;
-            background: rgba(30, 144, 255, 0.95); /* Increased opacity for better visibility */
+            background: rgba(205, 92, 92, 0.95); /* Indian Red */
             color: #fff;
             padding: 1rem;
             border-radius: 8px;
@@ -438,7 +437,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 99999; /* Very high z-index to appear above all sections */
+            z-index: 99999;
         }
 
         .popup.active {
@@ -464,21 +463,20 @@
         .popup::after {
             content: '';
             position: absolute;
-            top: 50%; /* Center vertically */
-            left: -10px; /* Positioned to the left */
+            top: 50%;
+            left: -10px;
             transform: translateY(-50%);
             border-width: 5px;
             border-style: solid;
-            border-color: transparent rgba(30, 144, 255, 0.95) transparent transparent; /* Match popup background and arrow direction */
+            border-color: transparent rgba(205, 92, 92, 0.95) transparent transparent;
         }
 
         /* Dark Theme Section */
         .dark-theme-section {
-            /* Updated background to a deeper Royal Blue gradient */
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark-blue) 50%, var(--accent-blue) 100%);
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-dark-orange) 50%, var(--accent-orange) 100%);
             position: relative;
             overflow: hidden;
-            z-index: 1; /* Ensure it's below popups */
+            z-index: 1;
         }
 
         /* About Card Styling */
@@ -489,21 +487,21 @@
             padding: 2rem !important;
             background: linear-gradient(
                 135deg,
-                rgba(65, 105, 225, 0.95) 0%, /* Royal Blue with opacity */
-                rgba(30, 144, 255, 0.85) 50%, /* Dodger Blue */
-                rgba(65, 105, 225, 0.95) 100% /* Royal Blue with opacity */
+                rgba(210, 105, 30, 0.95) 0%,
+                rgba(205, 92, 92, 0.85) 50%,
+                rgba(210, 105, 30, 0.95) 100%
             ) !important;
-            border: 2px solid transparent !important; /* Transparent gradient border */
+            border: 2px solid transparent !important;
             box-shadow: 
                 0 0 40px rgba(0, 0, 0, 0.4),
-                inset 0 0 40px rgba(0, 123, 255, 0.08),
-                0 0 30px rgba(0, 123, 255, 0.5),
-                0 0 60px rgba(0, 123, 255, 0.5) !important; /* Using --accent-glow */
+                inset 0 0 40px rgba(255, 140, 0, 0.08),
+                0 0 30px rgba(255, 140, 0, 0.5),
+                0 0 60px rgba(255, 140, 0, 0.5) !important;
             overflow: hidden;
-            backdrop-filter: blur(15px); /* Enhanced glass effect */
+            backdrop-filter: blur(15px);
             transform-style: preserve-3d;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            z-index: 2; /* Above anime-background */
+            z-index: 2;
         }
 
         /* Glowing Starship Border Around About Card */
@@ -516,10 +514,10 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
+            background: linear-gradient(45deg, var(--accent-orange), var(--accent-dark-orange), var(--accent-orange), var(--accent-dark-orange));
             background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
+            animation: gradientAnimation 15s ease infinite;
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.5), 0 0 40px rgba(255, 140, 0, 0.5);
         }
 
         /* Gradient Animation Keyframes */
@@ -537,8 +535,8 @@
             right: 0;
             bottom: 0;
             background-image: 
-                linear-gradient(rgba(0, 123, 255, 0.15) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 123, 255, 0.15) 1px, transparent 1px);
+                linear-gradient(rgba(255, 140, 0, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 140, 0, 0.15) 1px, transparent 1px);
             background-size: 30px 30px;
             opacity: 0.2;
             animation: gridMove 15s infinite ease-in-out;
@@ -560,8 +558,8 @@
         .profile-container {
             position: relative;
             display: inline-block;
-            flex: 2; /* Allows space for infographic */
-            text-align: center; /* Centers the "mouse hover" text */
+            flex: 2;
+            text-align: center;
         }
 
         /* Profile Image */
@@ -572,15 +570,15 @@
             object-fit: cover;
             box-shadow: 
                 0 10px 25px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(0, 123, 255, 0.3);
+                0 0 0 1px rgba(255, 140, 0, 0.3);
             transform: rotate(-3deg);
             transition: all 0.5s ease;
             position: relative;
             isolation: isolate;
-            margin-top: 0; /* Remove extra space above */
-            z-index: 1; /* Lower than popup */
-            cursor: pointer; /* Indicate interactivity */
-            left: -150px; /* Shift left by 150px */
+            margin-top: 0;
+            z-index: 1;
+            cursor: pointer;
+            left: -150px;
         }
 
         /* Profile Image Hover Effects */
@@ -588,8 +586,8 @@
             transform: rotate(0deg) scale(1.02);
             box-shadow: 
                 0 15px 35px rgba(0, 0, 0, 0.4),
-                0 0 0 2px rgba(0, 123, 255, 0.5),
-                0 0 30px rgba(0, 123, 255, 0.3);
+                0 0 0 2px rgba(255, 140, 0, 0.5),
+                0 0 30px rgba(255, 140, 0, 0.3);
         }
 
         .about-profile-img::before {
@@ -599,8 +597,8 @@
             background: linear-gradient(
                 125deg,
                 transparent 0%,
-                rgba(0, 123, 255, 0.3) 40%,
-                rgba(0, 255, 255, 0.6) 60%,
+                rgba(255, 140, 0, 0.3) 40%,
+                rgba(255, 165, 0, 0.6) 60%,
                 transparent 100%
             );
             animation: holoGlow 8s linear infinite;
@@ -615,7 +613,7 @@
             background: repeating-linear-gradient(
                 90deg,
                 transparent,
-                rgba(0, 123, 255, 0.1) 1px,
+                rgba(255, 140, 0, 0.1) 1px,
                 transparent 2px
             );
             animation: scanlines 8s linear infinite;
@@ -625,22 +623,22 @@
         /* Hover Button on Profile Image */
         .profile-hover-button {
             position: absolute;
-            bottom: -15px; /* Moved down by 15px */
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.2); /* Very transparent white */
+            background: rgba(255, 255, 255, 0.2);
             border: none;
-            color: rgba(255, 255, 255, 0.8); /* White with transparency */
+            color: rgba(255, 255, 255, 0.8);
             padding: 8px 16px;
             border-radius: 5px;
             font-size: 0.9rem;
             cursor: pointer;
             opacity: 1;
             transition: transform 0.3s ease;
-            z-index: 99999; /* Ensure visibility above everything */
+            z-index: 99999;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            width: 80px; /* Adjusted width */
-            height: 40px; /* Adjusted height */
+            width: 80px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -653,22 +651,22 @@
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
-            position: absolute; /* Positioned relative to .about-header */
-            top: 50%; /* Align vertically centered */
-            left: calc(50% - 200px); /* Moved left by 250px from previous position */
+            position: absolute;
+            top: 50%;
+            left: calc(50% - 200px);
             transform: translateY(-50%);
             width: 280px;
             height: 200px;
-            background: rgba(30, 144, 255, 0.95); /* Increased opacity for better visibility */
-            border: none; /* Removed the light blue border */
+            background: rgba(205, 92, 92, 0.95);
+            border: none;
             border-radius: 8px;
-            padding: 1rem; /* Reduced padding */
+            padding: 1rem;
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 99999; /* Very high z-index to appear above all sections */
+            z-index: 99999;
             backdrop-filter: blur(5px);
-            pointer-events: none; /* Prevents accidental clicks */
-            overflow: hidden; /* Hide overflowing stats */
+            pointer-events: none;
+            overflow: hidden;
         }
 
         .profile-stats-overlay::before {
@@ -680,10 +678,10 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
+            background: linear-gradient(45deg, var(--accent-orange), var(--accent-dark-orange), var(--accent-orange), var(--accent-dark-orange));
             background-size: 400% 400%;
-            animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Matching box-shadow */
+            animation: gradientAnimationInfographic 15s ease infinite;
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.5), 0 0 40px rgba(255, 140, 0, 0.5);
             z-index: -1;
         }
 
@@ -697,7 +695,7 @@
         .stats-cycler {
             display: flex;
             flex-direction: column;
-            position: relative; /* Relative positioning */
+            position: relative;
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -706,22 +704,22 @@
         /* Profile Stat Paragraph */
         .stat-paragraph {
             width: 100%;
-            color: rgba(255, 255, 255, 0.8); /* White with transparency */
+            color: rgba(255, 255, 255, 0.8);
             text-shadow: 
-                0 0 3px rgba(0, 183, 255, 0.8),
-                0 0 6px rgba(0, 183, 255, 0.5);
+                0 0 3px rgba(210, 105, 30, 0.8),
+                0 0 6px rgba(210, 105, 30, 0.5);
             font-weight: 500;
             letter-spacing: 0.5px;
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem; /* Reduced font size */
+            font-size: 0.9rem;
             opacity: 0;
             transition: opacity 0.3s ease, transform 0.3s ease;
-            white-space: normal; /* Allow text wrapping */
+            white-space: normal;
             word-wrap: break-word;
-            overflow: hidden; /* Prevent overflow */
-            background: rgba(0, 0, 0, 0.1); /* Reduced background opacity */
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.1);
             border-radius: 4px;
-            padding: 8px; /* Reduced padding */
+            padding: 8px;
             position: absolute;
             top: 0;
             left: 0;
@@ -738,12 +736,12 @@
         .about-content {
             position: relative;
             z-index: 3;
-            background: rgba(0, 29, 60, 0.4);
-            border: 1px solid rgba(0, 123, 255, 0.1);
+            background: rgba(46, 29, 14, 0.4);
+            border: 1px solid rgba(255, 140, 0, 0.1);
             padding: 1.5rem;
             border-radius: 15px;
             box-shadow: 
-                inset 0 0 40px rgba(0, 123, 255, 0.08),
+                inset 0 0 40px rgba(255, 140, 0, 0.08),
                 0 0 20px rgba(0, 0, 0, 0.15);
             margin-top: 1rem;
         }
@@ -757,13 +755,13 @@
             position: relative;
             z-index: 3;
             transition: all 0.3s ease;
-            opacity: 0; /* Hidden initially for typing effect */
+            opacity: 0;
         }
 
         .about-content p:hover {
-            text-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
+            text-shadow: 0 0 8px rgba(255, 140, 0, 0.8);
             letter-spacing: 0.2px;
-            background: rgba(0, 123, 255, 0.05);
+            background: rgba(255, 140, 0, 0.05);
             transform: scale(1.01);
         }
 
@@ -775,10 +773,10 @@
 
         /* Want to Know More Button */
         .want-know-more-btn {
-            display: none; /* Hidden initially */
+            display: none;
             margin-top: 1rem;
             padding: 10px 20px;
-            background: rgba(65, 105, 225, 0.9); /* Royal Blue with opacity */
+            background: rgba(210, 105, 30, 0.9);
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -789,7 +787,7 @@
         }
 
         .want-know-more-btn:hover {
-            background: rgba(30, 144, 255, 0.95); /* Dodger Blue on hover */
+            background: rgba(205, 92, 92, 0.95);
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
@@ -851,13 +849,13 @@
         @keyframes titlePulse {
             0% {
                 text-shadow: 
-                    0 0 10px rgba(0, 183, 255, 0.3),
-                    0 0 20px rgba(0, 183, 255, 0.2);
+                    0 0 10px rgba(210, 105, 30, 0.3),
+                    0 0 20px rgba(210, 105, 30, 0.2);
             }
             100% {
                 text-shadow: 
-                    0 0 15px rgba(0, 183, 255, 0.5),
-                    0 0 30px rgba(0, 183, 255, 0.3);
+                    0 0 15px rgba(210, 105, 30, 0.5),
+                    0 0 30px rgba(210, 105, 30, 0.3);
             }
         }
 
@@ -872,10 +870,10 @@
             width: 300px;
             height: 200px;
             overflow: hidden;
-            z-index: 1; /* Behind the content */
-            background: var(--infographic-bg); /* Background */
-            border-radius: 10px; /* Border radius */
-            padding: 1rem; /* Inner spacing */
+            z-index: 1;
+            background: var(--infographic-bg);
+            border-radius: 10px;
+            padding: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -891,10 +889,10 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
+            background: linear-gradient(45deg, var(--accent-orange), var(--accent-dark-orange), var(--accent-orange), var(--accent-dark-orange));
             background-size: 400% 400%;
-            animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
+            animation: gradientAnimationInfographic 15s ease infinite;
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.5), 0 0 40px rgba(255, 140, 0, 0.5);
         }
 
         .infographic-item {
@@ -904,7 +902,7 @@
             top: 0;
             left: 0;
             box-sizing: border-box;
-            display: flex; /* Always display flex */
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -919,12 +917,12 @@
         .infographic-item h4 {
             margin-bottom: 0.5rem;
             color: #fff;
-            text-shadow: 0 0 10px rgba(0, 183, 255, 0.5);
+            text-shadow: 0 0 10px rgba(210, 105, 30, 0.5);
             text-align: center;
             width: 100%;
             font-size: 1.5rem;
             position: relative;
-            border: none; /* No border */
+            border: none;
         }
 
         .infographic-item p {
@@ -933,19 +931,19 @@
             font-size: 1rem;
             width: 100%;
             position: relative;
-            max-height: 120px; /* Ensures text stays within box */
+            max-height: 120px;
             overflow: hidden;
         }
 
         /* Typing Effect */
         .typing-text {
             position: relative;
-            white-space: normal; /* Allow text wrapping */
+            white-space: normal;
             word-wrap: break-word;
             overflow: hidden;
             opacity: 0;
             transition: opacity 0.3s ease;
-            font-size: 0.9rem; /* Reduced font size */
+            font-size: 0.9rem;
         }
 
         /* Section Styling */
@@ -965,30 +963,29 @@
             margin-bottom: 2rem;
             box-shadow: 
                 0 10px 30px rgba(0, 0, 0, 0.3),
-                0 0 20px rgba(255, 0, 0, 0.2);
+                0 0 20px rgba(178, 34, 34, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
-            z-index: 2; /* Ensure cards are above lower sections */
+            z-index: 2;
         }
 
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 
                 0 15px 40px rgba(0, 0, 0, 0.4),
-                0 0 30px rgba(255, 0, 0, 0.3);
+                0 0 30px rgba(178, 34, 34, 0.3);
         }
 
         .card h3 {
-            color: var(--accent-blue);
+            color: var(--accent-orange);
             margin-bottom: 1.5rem;
             font-size: 1.8rem;
             position: relative;
             display: inline-block;
-            text-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
-            /* Removed the ::after pseudo-element */
+            text-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
         }
 
         /* Projects Grid */
@@ -1000,7 +997,7 @@
         }
 
         .project-card {
-            background: rgba(20, 30, 50, 0.95);
+            background: rgba(46, 29, 14, 0.95);
             border-radius: 15px;
             padding: 1.5rem;
             text-decoration: none;
@@ -1008,7 +1005,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 60, 0, 0.2);
+            border: 1px solid rgba(178, 34, 34, 0.2);
             backdrop-filter: blur(5px);
         }
 
@@ -1022,7 +1019,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 60, 0, 0.2),
+                rgba(178, 34, 34, 0.2),
                 transparent
             );
             transition: 0.5s;
@@ -1036,15 +1033,15 @@
             transform: translateY(-5px) scale(1.02);
             box-shadow: 
                 0 10px 25px rgba(0, 0, 0, 0.3),
-                0 0 20px rgba(0, 123, 255, 0.2);
+                0 0 20px rgba(255, 140, 0, 0.2);
         }
 
         .project-card h4 {
             color: #fff;
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-            border: none; /* No border */
+            text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+            border: none;
         }
 
         .project-card p {
@@ -1059,12 +1056,12 @@
             gap: 2rem;
             margin-top: 2rem;
             padding: 1rem;
-            background: rgba(20, 30, 50, 0.9);
+            background: rgba(46, 29, 14, 0.9);
             border-radius: 15px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 60, 0, 0.2);
-            z-index: 2; /* Ensure it's above lower sections */
+            border: 1px solid rgba(178, 34, 34, 0.2);
+            z-index: 2;
         }
 
         .social-link {
@@ -1074,7 +1071,7 @@
             letter-spacing: 2px;
             text-decoration: none;
             padding: 10px 20px;
-            background: rgba(255, 60, 0, 0.1);
+            background: rgba(178, 34, 34, 0.1);
             border-radius: 5px;
             overflow: hidden;
             transition: all 0.3s ease;
@@ -1090,7 +1087,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 60, 0, 0.2),
+                rgba(178, 34, 34, 0.2),
                 transparent
             );
             transition: 0.5s;
@@ -1101,9 +1098,9 @@
         }
 
         .social-link:hover {
-            background: rgba(255, 60, 0, 0.2);
+            background: rgba(178, 34, 34, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 60, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(178, 34, 34, 0.2);
         }
 
         /* Responsive Design */
@@ -1150,36 +1147,33 @@
 
             /* Fix profile image positioning on medium screens */
             .about-profile-img {
-                left: 0; /* Remove left offset */
-                margin: 0 auto; /* Center the image */
+                left: 0;
+                margin: 0 auto;
             }
 
             .profile-hover-button {
-                left: 50%; /* Center the button */
+                left: 50%;
                 transform: translateX(-50%);
             }
         }
 
         @media (max-width: 768px) and (orientation: portrait) {
             .profile-stats-overlay {
-                display: block; /* Show the overlay */
+                display: block;
             }
 
             .stat-paragraph {
-                font-size: 0.7rem; /* Reduce font size */
+                font-size: 0.7rem;
             }
 
-            /* Fix paragraph spacing */
             .about-content p {
                 text-align: left;
             }
 
-            /* Adjust infographic for portrait mode */
             .infographic {
-                height: 250px; /* Increased height for better fit */
+                height: 250px;
             }
 
-            /* Adjust profile-container to display stats next to image */
             .about-header {
                 flex-direction: column;
                 align-items: center;
@@ -1188,30 +1182,29 @@
             .profile-container {
                 display: flex;
                 flex-direction: column;
-                align-items: center; /* Center align for mobile */
+                align-items: center;
                 justify-content: center;
                 gap: 1rem;
                 width: 100%;
             }
 
             .profile-hover-button {
-                display: none; /* Hide the stats button on mobile */
+                display: none;
             }
 
             .infographic {
                 width: 100%;
-                height: 250px; /* Increased height */
+                height: 250px;
             }
 
-            /* Profile Image Adjustments */
             .about-profile-img {
-                width: 130px; /* Further reduced size */
+                width: 130px;
                 height: 130px;
-                transform: translate(0, -20px); /* Move up */
+                transform: translate(0, -20px);
                 margin-left: 0;
                 position: relative;
                 display: block;
-                margin: 0 auto; /* Center the image */
+                margin: 0 auto;
             }
         }
 
@@ -1266,16 +1259,16 @@
 
             /* About Section Adjustments */
             .about-content p {
-                font-size: 1rem; /* Smaller text size for mobile */
+                font-size: 1rem;
             }
 
             .stat-paragraph {
-                font-size: 0.8rem; /* Smaller stats text */
+                font-size: 0.8rem;
             }
 
             /* Adjust infographic for portrait mode */
             .infographic {
-                height: 250px; /* Increased height */
+                height: 250px;
             }
 
             /* Adjust profile-container to display stats next to image */
@@ -1287,28 +1280,28 @@
             .profile-container {
                 display: flex;
                 flex-direction: column;
-                align-items: center; /* Center align for mobile */
+                align-items: center;
                 justify-content: center;
                 gap: 1rem;
                 width: 100%;
             }
 
             .profile-hover-button {
-                display: none; /* Hide the stats button on mobile */
+                display: none;
             }
 
             .infographic {
                 width: 100%;
-                height: 250px; /* Increased height */
+                height: 250px;
             }
 
             /* Profile Image Adjustments */
             .about-profile-img {
-                left: 0; /* Ensure no left offset */
-                margin: 0 auto; /* Center the image */
-                transform: translate(0, -20px); /* Move up */
+                left: 0;
+                margin: 0 auto;
+                transform: translate(0, -20px);
                 display: block;
-                margin: 0 auto; /* Center the image */
+                margin: 0 auto;
             }
         }
 
@@ -1316,12 +1309,12 @@
             .about-profile-img {
                 width: 120px;
                 height: 120px;
-                transform: translate(0, -20px); /* Move up */
-                left: 0; /* Ensure no left offset */
-                margin: 0 auto; /* Center the image */
+                transform: translate(0, -20px);
+                left: 0;
+                margin: 0 auto;
                 position: relative;
                 display: block;
-                margin: 0 auto; /* Center the image */
+                margin: 0 auto;
             }
 
             .glow-text {
@@ -1336,17 +1329,16 @@
                 padding: 1rem;
             }
 
-            /* Further fix profile image and stats positioning on small screens */
             .about-profile-img {
-                left: 0; /* Ensure no left offset */
-                margin: 0 auto; /* Center the image */
-                transform: translate(0, -20px); /* Move up */
+                left: 0;
+                margin: 0 auto;
+                transform: translate(0, -20px);
                 display: block;
-                margin: 0 auto; /* Center the image */
+                margin: 0 auto;
             }
 
             .profile-hover-button {
-                display: none; /* Ensure the button is hidden */
+                display: none;
             }
 
             .profile-stats-overlay {
@@ -1362,7 +1354,7 @@
             }
 
             .social-link {
-                background: rgba(255, 60, 0, 0.15);
+                background: rgba(178, 34, 34, 0.15);
             }
         }
 
@@ -1382,9 +1374,6 @@
             100% { transform: translateX(0); }
         }
 
-        /* Infographics Typing and Cycling */
-        /* Removed redundant keyframes */
-
         /* Added Styles for Random Japanese Characters */
         .random-char {
             position: absolute;
@@ -1403,8 +1392,8 @@
             color: var(--code-red);
         }
 
-        .random-char.blue {
-            color: var(--code-blue);
+        .random-char.orange {
+            color: var(--code-orange);
         }
 
         @keyframes fadeInOut {
@@ -1420,17 +1409,16 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 300px; /* Adjust height as needed */
-            /* Make it invisible */
+            height: 300px;
             background: transparent;
             pointer-events: none;
-            z-index: 5; /* Above other elements */
+            z-index: 5;
         }
 
         /* Responsive Adjustments for Profile Hover Button */
         @media (max-width: 768px) {
             .profile-hover-button {
-                display: none; /* Hide the stats button on mobile */
+                display: none;
             }
 
             .profile-stats-overlay {
@@ -1440,10 +1428,10 @@
 
         /* Want to Know More Button Styles */
         .want-know-more-btn {
-            display: none; /* Hidden initially */
+            display: none;
             margin-top: 1rem;
             padding: 10px 20px;
-            background: rgba(65, 105, 225, 0.9); /* Royal Blue with opacity */
+            background: rgba(210, 105, 30, 0.9);
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -1454,85 +1442,17 @@
         }
 
         .want-know-more-btn:hover {
-            background: rgba(30, 144, 255, 0.95); /* Dodger Blue on hover */
+            background: rgba(205, 92, 92, 0.95);
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
 
         /* Animations */
-        @keyframes ripple {
-            0% {
-                transform: scale(0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(3);
-                opacity: 0;
-            }
+        @keyframes gradientAnimationInfographic {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes matrixRain {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(100%); }
-        }
-
-        @keyframes fireFlow {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 200%; }
-        }
-
-        @keyframes holoGlow {
-            0% { 
-                opacity: 0.3;
-                transform: translateX(-100%) rotate(35deg);
-            }
-            100% { 
-                opacity: 0.7;
-                transform: translateX(200%) rotate(35deg);
-            }
-        }
-
-        @keyframes scanlines {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100%); }
-        }
-
-        @keyframes gridMove {
-            0% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(10px) translateX(5px); }
-            100% { transform: translateY(0) translateX(0); }
-        }
-
-        @keyframes borderGlow {
-            0% { opacity: 0.3; filter: blur(3px); }
-            100% { opacity: 1; filter: blur(1px); }
-        }
-
-        @keyframes titlePulse {
-            0% {
-                text-shadow: 
-                    0 0 10px rgba(0, 183, 255, 0.3),
-                    0 0 20px rgba(0, 183, 255, 0.2);
-            }
-            100% {
-                text-shadow: 
-                    0 0 15px rgba(0, 183, 255, 0.5),
-                    0 0 30px rgba(0, 183, 255, 0.3);
-            }
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* Infographics Typing and Cycling */
-        /* Removed redundant keyframes */
     </style>
 </head>
 
@@ -1846,7 +1766,6 @@
                             <h4>Helga Unity</h4>
                             <p>Game Development</p>
                         </a>
-                        <!-- Removed Placeholder Projects -->
                     </div>
                 </div>
             </section>
@@ -1875,20 +1794,19 @@
             const containers = document.querySelectorAll('.matrix-background');
             containers.forEach(container => {
                 const containerWidth = container.offsetWidth;
-                const columnWidth = 30; // Increased width for fewer columns
+                const columnWidth = 30;
                 const numberOfColumns = Math.ceil(containerWidth / columnWidth);
 
                 const chars = '守らリケーシタアプョン01{}#$@987';
 
-                container.innerHTML = ''; // Clear existing columns
+                container.innerHTML = '';
 
                 for(let i = 0; i < numberOfColumns; i++) {
                     const column = document.createElement('div');
                     column.className = 'matrix-column';
                     
-                    // Create random string of characters
                     let columnChars = '';
-                    for(let j = 0; j < 100; j++) { // Increased from 50 to 100
+                    for(let j = 0; j < 100; j++) {
                         columnChars += chars[Math.floor(Math.random() * chars.length)] + '\n';
                     }
 
@@ -1908,10 +1826,8 @@
             const columnWidth = 40;
             const numberOfColumns = Math.ceil(containerWidth / columnWidth);
             
-            // Anime characters pool
             const chars = '守らリケーシタアプョン01{}#$@987';
             
-            // Create columns
             for(let i = 0; i < numberOfColumns; i++) {
                 const column = document.createElement('div');
                 column.className = 'anime-column';
@@ -1925,7 +1841,6 @@
                 column.style.left = `${i * columnWidth}px`;
                 column.style.animationDelay = `${-Math.random() * 20}s`;
                 
-                // Randomly add glow effect
                 if (Math.random() < 0.3) {
                     column.classList.add('glow');
                 }
@@ -1935,7 +1850,7 @@
         }
 
         // Profile Stats Functions
-        let isCyclingStats = false; // Flag to prevent multiple cycles
+        let isCyclingStats = false;
 
         function initializeProfileStats() {
             const statsData = [
@@ -1950,8 +1865,7 @@
             let currentStatIndex = 0;
             const totalStats = statsData.length;
 
-            // Function to type text into an element using GSAP TextPlugin
-            function typeText(element, text, speed = 0.02) { // Increased speed
+            function typeText(element, text, speed = 0.02) {
                 return gsap.to(element, {
                     duration: text.length * speed,
                     text: text,
@@ -1962,9 +1876,8 @@
                 });
             }
 
-            // Function to cycle through stats sequentially
             function cycleStats() {
-                if (isCyclingStats) return; // Prevent multiple cycles
+                if (isCyclingStats) return;
                 isCyclingStats = true;
 
                 const timeline = gsap.timeline({ repeat: -1 });
@@ -1972,20 +1885,18 @@
                 statsData.forEach((text, index) => {
                     const currentParagraph = paragraphs[index % paragraphs.length];
                     timeline.call(() => {
-                        typeText(currentParagraph.querySelector('p'), text, 0.02); // Increased speed
-                    }, null, `+=0.5`); // Delay before starting each paragraph
-                    timeline.to({}, { duration: text.length * 0.02 + 1.5 }); // Wait for typing and display duration
+                        typeText(currentParagraph.querySelector('p'), text, 0.02);
+                    }, null, `+=0.5`);
+                    timeline.to({}, { duration: text.length * 0.02 + 1.5 });
                     timeline.call(() => {
                         currentParagraph.classList.remove('active');
                         currentParagraph.querySelector('p').textContent = '';
                     });
                 });
 
-                // Repeat the cycle infinitely
                 timeline.repeat(-1);
             }
 
-            // Attach event listeners to start cycling on hover for desktop
             const profileImg = document.querySelector('.about-profile-img');
             const statsButton = document.querySelector('.profile-hover-button');
             const statsOverlay = document.querySelector('.profile-stats-overlay');
@@ -1997,7 +1908,7 @@
                     ease: "power1.out"
                 });
                 if (!isCyclingStats) {
-                    cycleStats(); // Start cycling on first hover
+                    cycleStats();
                 }
             }
 
@@ -2015,7 +1926,6 @@
             statsButton.addEventListener('mouseenter', showStats);
             statsButton.addEventListener('mouseleave', hideStats);
 
-            // Automatically start cycling on mobile
             function startCyclingIfMobile() {
                 if (window.innerWidth <= 768 && !isCyclingStats) {
                     gsap.to(statsOverlay, {
@@ -2027,10 +1937,8 @@
                 }
             }
 
-            // Initial check
             startCyclingIfMobile();
 
-            // Listen for resize events to handle orientation changes
             window.addEventListener('resize', startCyclingIfMobile);
         }
 
@@ -2095,8 +2003,7 @@
         let currentInfographic = 0;
         let infographicItems = [];
 
-        // Function to type text into an element using GSAP TextPlugin
-        function typeTextInfographic(element, text, speed = 0.02) { // Increased speed
+        function typeTextInfographic(element, text, speed = 0.02) {
             return gsap.to(element, {
                 duration: text.length * speed,
                 text: text,
@@ -2107,7 +2014,6 @@
             });
         }
 
-        // Function to cycle through infographics
         function cycleInfographics() {
             if (infographicItems.length === 0) return;
 
@@ -2117,10 +2023,10 @@
                 const currentItem = infographicItems[index % infographicItems.length];
                 timeline.call(() => {
                     currentItem.classList.add('active');
-                    typeTextInfographic(currentItem.querySelector('h4'), item.title, 0.02); // Increased speed
-                    typeTextInfographic(currentItem.querySelector('.typing-text'), item.text, 0.02); // Increased speed
+                    typeTextInfographic(currentItem.querySelector('h4'), item.title, 0.02);
+                    typeTextInfographic(currentItem.querySelector('.typing-text'), item.text, 0.02);
                 });
-                timeline.to({}, { duration: (item.title.length + item.text.length) * 0.02 + 1.5 }); // Wait for typing and display duration
+                timeline.to({}, { duration: (item.title.length + item.text.length) * 0.02 + 1.5 });
                 timeline.call(() => {
                     currentItem.classList.remove('active');
                     currentItem.querySelector('h4').textContent = '';
@@ -2129,11 +2035,10 @@
             });
         }
 
-        // Function to dynamically create infographic items
         function createInfographicItems() {
             const infographicContainer = document.querySelector('.infographic');
-            infographicContainer.innerHTML = ''; // Clear existing items
-            infographicItems = []; // Reset the array
+            infographicContainer.innerHTML = '';
+            infographicItems = [];
 
             infographicData.forEach((item, index) => {
                 const infographicItem = document.createElement('div');
@@ -2151,7 +2056,7 @@
         function startParticles() {
             const particlesContainers = document.querySelectorAll('.particles-container');
             particlesContainers.forEach(container => {
-                setInterval(() => createParticle(container), 100); // Increased frequency
+                setInterval(() => createParticle(container), 100);
             });
         }
 
@@ -2162,7 +2067,7 @@
         }
 
         // Function to display multiple random stars with random color
-        function displayRandomJapaneseChars(count = 4) { // Increased count from 2 to 4
+        function displayRandomJapaneseChars(count = 4) {
             const darkSection = document.querySelector('.dark-theme-section');
             const stars = ['★', '☆', '✩', '✪', '✫', '✬', '✭', '✮', '✯'];
 
@@ -2171,14 +2076,12 @@
                 const randomStarElem = document.createElement('span');
                 randomStarElem.className = 'random-char';
 
-                // Randomly assign one of the three colors
-                const colors = ['white', 'red', 'blue'];
+                const colors = ['white', 'red', 'orange'];
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 randomStarElem.classList.add(randomColor);
 
                 randomStarElem.textContent = star;
 
-                // Random position within the dark-theme-section
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
 
@@ -2187,7 +2090,6 @@
 
                 darkSection.appendChild(randomStarElem);
 
-                // Remove the star after animation completes
                 randomStarElem.addEventListener('animationend', () => {
                     randomStarElem.remove();
                 });
@@ -2195,9 +2097,9 @@
         }
 
         // Function to type text into a paragraph and return a Promise
-        function typeParagraph(para, fullText, speed = 0.02) { // Increased speed
+        function typeParagraph(para, fullText, speed = 0.02) {
             return new Promise((resolve) => {
-                para.textContent = ''; // Clear existing text
+                para.textContent = '';
                 gsap.to(para, {
                     duration: fullText.length * speed,
                     text: fullText,
@@ -2212,12 +2114,11 @@
 
         // Initialize Everything
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Matrix
             createMatrixBackground();
             setInterval(() => {
                 const columns = document.querySelectorAll('.matrix-column');
                 columns.forEach(column => {
-                    if (Math.random() < 0.01) { // 1% chance per column to glow a character
+                    if (Math.random() < 0.01) {
                         const randomCharIndex = Math.floor(Math.random() * 100);
                         const char = column.childNodes[randomCharIndex];
                         if (char) {
@@ -2228,13 +2129,10 @@
                 });
             }, 100);
 
-            // Initialize Anime Background
             createAnimeBackground();
 
-            // Initialize Profile Stats
             initializeProfileStats();
 
-            // GSAP Animations for Titles
             gsap.to('.title', {
                 opacity: 1,
                 duration: 1,
@@ -2247,7 +2145,6 @@
                 delay: 0.8
             });
 
-            // Skill Icons Animation and Popup Functionality
             const skillWrappers = document.querySelectorAll('.skill-wrapper');
             skillWrappers.forEach((wrapper, index) => {
                 const icon = wrapper.querySelector('.skill-icon');
@@ -2255,15 +2152,12 @@
                 const info1 = icon.getAttribute('data-info1');
                 const info2 = icon.getAttribute('data-info2');
 
-                // Function to generate random stat
                 function generateRandomStat() {
-                    const efficiency = Math.floor(Math.random() * 11) + 85; // 85 to 95
+                    const efficiency = Math.floor(Math.random() * 11) + 85;
                     return `Efficiency: ${efficiency}%`;
                 }
 
-                // Function to show popup
                 function showPopup() {
-                    // Hide other popups
                     document.querySelectorAll('.popup').forEach(p => {
                         if (p !== popup) {
                             p.classList.remove('active');
@@ -2279,30 +2173,26 @@
                     const para2 = popup.querySelector('.info2');
                     const stat = popup.querySelector('.stat');
 
-                    // Generate random stat
                     const randomStat = generateRandomStat();
 
-                    // Type out the first bullet point
                     gsap.to(para1, {
-                        duration: info1.length * 0.02, // Increased speed
+                        duration: info1.length * 0.02,
                         text: info1,
                         ease: "none",
                         onStart: () => {
                             para1.style.opacity = '1';
                         },
                         onComplete: () => {
-                            // Type out the second bullet point
                             gsap.to(para2, {
-                                duration: info2.length * 0.02, // Increased speed
+                                duration: info2.length * 0.02,
                                 text: info2,
                                 ease: "none",
                                 onStart: () => {
                                     para2.style.opacity = '1';
                                 },
                                 onComplete: () => {
-                                    // Type out the random stat
                                     gsap.to(stat, {
-                                        duration: randomStat.length * 0.02, // Increased speed
+                                        duration: randomStat.length * 0.02,
                                         text: randomStat,
                                         ease: "none",
                                         onStart: () => {
@@ -2315,7 +2205,6 @@
                     });
                 }
 
-                // Function to hide popup
                 function hidePopup() {
                     popup.classList.remove('active');
                     popup.querySelectorAll('p').forEach(pElem => {
@@ -2323,13 +2212,11 @@
                     });
                 }
 
-                // Event listeners for hover on the wrapper to prevent shaking
                 wrapper.addEventListener('mouseenter', showPopup);
                 wrapper.addEventListener('mouseleave', hidePopup);
 
-                // Event listeners for click
                 wrapper.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent default link behavior
+                    e.preventDefault();
                     if (popup.classList.contains('active')) {
                         hidePopup();
                     } else {
@@ -2337,17 +2224,15 @@
                     }
                 });
 
-                // Initial GSAP animation for skill icons
                 gsap.to(icon, {
                     opacity: 1,
                     scale: 1,
                     duration: 0.5,
-                    delay: 1.2 + (index * 0.05), // Slightly faster stagger
+                    delay: 1.2 + (index * 0.05),
                     ease: "back.out(1.7)"
                 });
             });
 
-            // Section Animations with ScrollTrigger
             const sections = document.querySelectorAll('.section');
             sections.forEach((section, index) => {
                 gsap.to(section, {
@@ -2362,19 +2247,14 @@
                 });
             });
 
-            // Create infographic items
             createInfographicItems();
 
-            // Start Infographics Cycling
             cycleInfographics();
 
-            // Initialize Particles
             startParticles();
 
-            // Start displaying random stars
-            setInterval(() => displayRandomJapaneseChars(4), 150); // Increased stars and frequency
+            setInterval(() => displayRandomJapaneseChars(4), 150);
 
-            // Window Resize Handler
             window.addEventListener('resize', () => {
                 createMatrixBackground();
                 const animeContainer = document.querySelector('.anime-background');
@@ -2382,13 +2262,12 @@
                 createAnimeBackground();
             });
 
-            // Mouse Movement Handler
             document.addEventListener('mousemove', (e) => {
                 const particlesContainers = document.querySelectorAll('.particles-container');
                 particlesContainers.forEach(container => {
                     const rect = container.getBoundingClientRect();
                     if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                        if (Math.random() < 0.3) { // Increased chance for more energy waves
+                        if (Math.random() < 0.3) {
                             const x = e.clientX - rect.left;
                             const y = e.clientY - rect.top;
                             createEnergyWave(x, y, container);
@@ -2397,34 +2276,29 @@
                 });
             });
 
-            // Typed-in Effect for Summary Paragraphs
             const aboutContent = document.querySelectorAll('.about-content p');
             const paragraphs = Array.from(aboutContent);
             let currentParagraphIndex = 0;
 
-            // Type the first paragraph and then show the button
             const firstParagraph = paragraphs[0];
             const firstText = firstParagraph.getAttribute('data-text');
-            typeParagraph(firstParagraph, firstText, 0.02).then(() => { // Increased speed
+            typeParagraph(firstParagraph, firstText, 0.02).then(() => {
                 const moreBtn = document.getElementById('more-btn');
-                moreBtn.style.display = 'inline-block'; // Show the button
+                moreBtn.style.display = 'inline-block';
                 gsap.fromTo(moreBtn, { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.2 });
             });
 
-            // Handle the "Want to know more?" button click
             const moreButton = document.getElementById('more-btn');
             moreButton.addEventListener('click', async () => {
-                // Hide the button with a fade-out effect
                 gsap.to(moreButton, { opacity: 0, duration: 0.3 });
                 setTimeout(() => {
-                    moreButton.style.display = 'none'; // Hide the button after fade-out
+                    moreButton.style.display = 'none';
                 }, 300);
 
-                // Type the remaining paragraphs sequentially
                 for(let i = 1; i < paragraphs.length; i++) {
                     const para = paragraphs[i];
                     const fullText = para.getAttribute('data-text');
-                    await typeParagraph(para, fullText, 0.02); // Increased speed
+                    await typeParagraph(para, fullText, 0.02);
                 }
             });
         });
@@ -2447,7 +2321,6 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 target.scrollIntoView({ behavior: 'smooth' });
 
-                // Close the menu after clicking a link
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
             });
