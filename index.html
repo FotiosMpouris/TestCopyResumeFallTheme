@@ -13,22 +13,23 @@
     <style>
         /* Core Variables */
         :root {
-            --primary-dark: #4E342E; /* Deep Brown */
-            --primary-light: #FFF3E0; /* Cream */
-            --accent-orange: #D84315; /* Burnt Orange */
-            --accent-yellow: #F9A825; /* Mustard Yellow */
-            --accent-green: #33691E; /* Olive Green */
-            --accent-glow: rgba(249, 168, 37, 0.6); /* Mustard Yellow glow */
-            --text-primary: #FAFAFA; /* Soft White */
-            --text-secondary: #212121; /* Dark Charcoal */
-            --matrix-color: rgba(249, 168, 37, 0.25); /* Mustard Yellow */
-            --matrix-glow: rgba(249, 168, 37, 0.6); /* Mustard Yellow glow */
+            --primary-dark: #0a192f;
+            --primary-light: #20232a;
+            --accent-blue: #4169E1; /* Royal Blue */
+            --accent-light-blue: #1E90FF; /* Dodger Blue */
+            --accent-dark-blue: #0000CD; /* Medium Blue */
+            --accent-red: #FF0000; /* Consistent red */
+            --accent-glow: rgba(0, 170, 255, 0.6); /* Light blue glow */
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --matrix-color: rgba(0, 183, 255, 0.25);
+            --matrix-glow: rgba(0, 183, 255, 0.6); /* For anime effect */
             --transition-standard: all 0.3s ease;
-            --infographic-bg: rgba(249, 168, 37, 0.3); /* Mustard Yellow */
-            --code-white: #FAFAFA;
-            --code-red: #D84315; /* Burnt Orange */
-            --code-yellow: #F9A825; /* Mustard Yellow */
-            --faint-text: rgba(250, 250, 250, 0.4); /* Soft White with transparency */
+            --infographic-bg: rgba(0, 123, 255, 0.3); /* Semi-transparent Blue */
+            --code-white: #ffffff;
+            --code-red: #ff0000;
+            --code-blue: #0000ff;
+            --faint-text: rgba(255, 255, 255, 0.4); /* For "mouse hover" text */
         }
 
         /* Reset and Base Styles */
@@ -65,11 +66,11 @@
             height: 40px;
             cursor: pointer;
             transition: color 0.3s ease, transform 0.3s ease;
-            color: var(--text-primary);
+            color: #ffffff; /* White */
         }
 
         .github-icon:hover {
-            color: var(--accent-orange);
+            color: #ff0000; /* Red */
             transform: scale(1.2);
         }
 
@@ -113,7 +114,7 @@
         }
 
         .nav-links li a:hover {
-            color: var(--accent-yellow); /* Mustard Yellow */
+            color: var(--accent-blue);
         }
 
         /* Dropdown Menu Styles for Mobile and Desktop */
@@ -202,7 +203,7 @@
             background: radial-gradient(
                 circle at center,
                 var(--accent-glow) 0%,
-                rgba(249, 168, 37, 0.15) 30%,
+                rgba(0, 123, 255, 0.15) 30%,
                 transparent 70%
             );
             animation: ripple 6s infinite;
@@ -248,7 +249,7 @@
             background: linear-gradient(
                 0deg,
                 transparent,
-                rgba(255, 168, 37, 0.2) 50%,
+                rgba(255, 60, 0, 0.2) 50%,
                 transparent
             );
             background-size: 100% 200%;
@@ -256,6 +257,7 @@
                 matrixRain 20s linear infinite,
                 fireFlow 8s linear infinite;
             mix-blend-mode: screen;
+            z-index: 1; /* Ensure it's below popups */
         }
 
         .matrix-column::before {
@@ -306,6 +308,7 @@
             mix-blend-mode: screen;
             text-shadow: 0 0 8px var(--matrix-glow);
             opacity: 0.7;
+            z-index: 1; /* Below popups */
         }
 
         .anime-column.glow {
@@ -335,9 +338,10 @@
                 var(--primary-dark) 0%,
                 var(--primary-light) 100%
             );
-            overflow: hidden;
+            overflow: visible; /* Changed from hidden to visible */
             color: var(--text-primary);
             padding-top: 80px; /* Adjusted padding to prevent content from being hidden behind navbar */
+            z-index: 2; /* Ensure it's above background elements */
         }
 
         .hero::before {
@@ -345,9 +349,10 @@
             position: absolute;
             inset: 0;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(249, 168, 37, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(249, 168, 37, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(0,123,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0,123,255,0.1) 0%, transparent 50%);
             animation: glowPulse 8s ease-in-out infinite;
+            z-index: 1; /* Below content */
         }
 
         .container {
@@ -363,12 +368,11 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             opacity: 0;
-            text-shadow: 0 0 15px var(--accent-glow), 0 0 30px var(--accent-glow);
         }
 
         .subtitle {
             font-size: 1.5rem;
-            color: var(--accent-yellow); /* Mustard Yellow */
+            color: var(--accent-blue);
             margin-bottom: 2rem;
             opacity: 0;
         }
@@ -383,10 +387,17 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            position: relative; /* To position popups absolutely */
+            z-index: 2; /* Ensure it's above background sections */
+        }
+
+        .skill-wrapper {
+            position: relative; /* Position relative to contain the absolute popup */
+            /* Removed z-index to prevent stacking context interference */
         }
 
         .skill-icon {
-            background: rgba(250, 250, 250, 0.1); /* Soft White with transparency */
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             padding: 0.8rem;
             display: flex;
@@ -396,11 +407,13 @@
             transform: scale(0.5);
             transition: var(--transition-standard);
             cursor: pointer;
+            position: relative;
+            z-index: 1; /* Lower than popup */
         }
 
         .skill-icon:hover {
             transform: scale(1.1) !important;
-            background: rgba(250, 250, 250, 0.2); /* Increased transparency */
+            background: rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 20px var(--accent-glow);
         }
 
@@ -410,12 +423,62 @@
             object-fit: contain;
         }
 
+        /* Popup Styles */
+        .popup {
+            position: absolute; /* Positioned relative to .skill-wrapper */
+            top: 50%; /* Align vertically centered */
+            left: 100%; /* Position to the right of the skill icon */
+            transform: translateY(-50%);
+            width: 250px;
+            background: rgba(30, 144, 255, 0.95); /* Increased opacity for better visibility */
+            color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 99999; /* Very high z-index to appear above all sections */
+        }
+
+        .popup.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup p.info1,
+        .popup p.info2 {
+            margin-bottom: 0.5rem;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .popup p.stat {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Tooltip Arrow */
+        .popup::after {
+            content: '';
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: -10px; /* Positioned to the left */
+            transform: translateY(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent rgba(30, 144, 255, 0.95) transparent transparent; /* Match popup background and arrow direction */
+        }
+
         /* Dark Theme Section */
         .dark-theme-section {
-            /* Updated background to a deeper Burnt Orange gradient */
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-green) 50%, var(--accent-orange) 100%);
+            /* Updated background to a deeper Royal Blue gradient */
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-dark-blue) 50%, var(--accent-blue) 100%);
             position: relative;
             overflow: hidden;
+            z-index: 1; /* Ensure it's below popups */
         }
 
         /* About Card Styling */
@@ -426,16 +489,16 @@
             padding: 2rem !important;
             background: linear-gradient(
                 135deg,
-                rgba(216, 67, 21, 0.95) 0%, /* Burnt Orange with opacity */
-                rgba(249, 168, 37, 0.85) 50%, /* Mustard Yellow */
-                rgba(216, 67, 21, 0.95) 100% /* Burnt Orange with opacity */
+                rgba(65, 105, 225, 0.95) 0%, /* Royal Blue with opacity */
+                rgba(30, 144, 255, 0.85) 50%, /* Dodger Blue */
+                rgba(65, 105, 225, 0.95) 100% /* Royal Blue with opacity */
             ) !important;
             border: 2px solid transparent !important; /* Transparent gradient border */
             box-shadow: 
                 0 0 40px rgba(0, 0, 0, 0.4),
-                inset 0 0 40px rgba(249, 168, 37, 0.08),
-                0 0 30px rgba(249, 168, 37, 0.5),
-                0 0 60px rgba(249, 168, 37, 0.5) !important; /* Using --accent-glow */
+                inset 0 0 40px rgba(0, 123, 255, 0.08),
+                0 0 30px rgba(0, 123, 255, 0.5),
+                0 0 60px rgba(0, 123, 255, 0.5) !important; /* Using --accent-glow */
             overflow: hidden;
             backdrop-filter: blur(15px); /* Enhanced glass effect */
             transform-style: preserve-3d;
@@ -453,10 +516,10 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, var(--accent-orange), var(--accent-green), var(--accent-orange), var(--accent-green)); /* Burnt Orange Gradient */
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(249, 168, 37, 0.5), 0 0 40px rgba(249, 168, 37, 0.5);
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
         }
 
         /* Gradient Animation Keyframes */
@@ -474,8 +537,8 @@
             right: 0;
             bottom: 0;
             background-image: 
-                linear-gradient(rgba(249, 168, 37, 0.15) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(249, 168, 37, 0.15) 1px, transparent 1px);
+                linear-gradient(rgba(0, 123, 255, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 123, 255, 0.15) 1px, transparent 1px);
             background-size: 30px 30px;
             opacity: 0.2;
             animation: gridMove 15s infinite ease-in-out;
@@ -509,13 +572,13 @@
             object-fit: cover;
             box-shadow: 
                 0 10px 25px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(249, 168, 37, 0.3);
+                0 0 0 1px rgba(0, 123, 255, 0.3);
             transform: rotate(-3deg);
             transition: all 0.5s ease;
             position: relative;
             isolation: isolate;
             margin-top: 0; /* Remove extra space above */
-            z-index: 3;
+            z-index: 1; /* Lower than popup */
             cursor: pointer; /* Indicate interactivity */
             left: -150px; /* Shift left by 150px */
         }
@@ -525,8 +588,8 @@
             transform: rotate(0deg) scale(1.02);
             box-shadow: 
                 0 15px 35px rgba(0, 0, 0, 0.4),
-                0 0 0 2px rgba(249, 168, 37, 0.5),
-                0 0 30px rgba(249, 168, 37, 0.3);
+                0 0 0 2px rgba(0, 123, 255, 0.5),
+                0 0 30px rgba(0, 123, 255, 0.3);
         }
 
         .about-profile-img::before {
@@ -536,8 +599,8 @@
             background: linear-gradient(
                 125deg,
                 transparent 0%,
-                rgba(249, 168, 37, 0.3) 40%,
-                rgba(255, 255, 255, 0.6) 60%,
+                rgba(0, 123, 255, 0.3) 40%,
+                rgba(0, 255, 255, 0.6) 60%,
                 transparent 100%
             );
             animation: holoGlow 8s linear infinite;
@@ -552,7 +615,7 @@
             background: repeating-linear-gradient(
                 90deg,
                 transparent,
-                rgba(249, 168, 37, 0.1) 1px,
+                rgba(0, 123, 255, 0.1) 1px,
                 transparent 2px
             );
             animation: scanlines 8s linear infinite;
@@ -563,17 +626,18 @@
         .profile-hover-button {
             position: absolute;
             bottom: -15px; /* Moved down by 15px */
-            left: calc(50% - 40px); /* Center horizontally relative to profile image */
-            background: rgba(250, 250, 250, 0.2); /* Very transparent white */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.2); /* Very transparent white */
             border: none;
-            color: rgba(250, 250, 250, 0.8); /* Soft White with transparency */
+            color: rgba(255, 255, 255, 0.8); /* White with transparency */
             padding: 8px 16px;
             border-radius: 5px;
             font-size: 0.9rem;
             cursor: pointer;
             opacity: 1;
             transition: transform 0.3s ease;
-            z-index: 5; /* Ensure visibility */
+            z-index: 99999; /* Ensure visibility above everything */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             width: 80px; /* Adjusted width */
             height: 40px; /* Adjusted height */
@@ -582,26 +646,26 @@
             justify-content: center;
         }
 
-        /* Optional: Add slight hover effect */
+        /* Fixed Transform on Hover to Prevent Shaking */
         .profile-hover-button:hover {
-            transform: translateY(-3px);
+            transform: translateX(-50%) translateY(-3px);
         }
 
         /* Profile Stats Overlay */
         .profile-stats-overlay {
-            position: absolute;
-            top: 50%; /* Center vertically relative to the profile image */
-            left: calc(100% + 35px); /* Moved 35px to the right */
-            transform: translate(-300px, -50%);
-            width: 280px; /* Slightly narrower for better fit */
-            height: 200px; /* Fixed height for cycling */
-            background: rgba(48, 54, 85, 0.5); /* Royal Blue theme */
+            position: absolute; /* Positioned relative to .about-header */
+            top: 50%; /* Align vertically centered */
+            left: calc(50% - 200px); /* Moved left by 250px from previous position */
+            transform: translateY(-50%);
+            width: 280px;
+            height: 200px;
+            background: rgba(30, 144, 255, 0.95); /* Increased opacity for better visibility */
             border: none; /* Removed the light blue border */
             border-radius: 8px;
             padding: 1rem; /* Reduced padding */
             opacity: 0;
             transition: all 0.3s ease;
-            z-index: 4;
+            z-index: 99999; /* Very high z-index to appear above all sections */
             backdrop-filter: blur(5px);
             pointer-events: none; /* Prevents accidental clicks */
             overflow: hidden; /* Hide overflowing stats */
@@ -616,16 +680,16 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, var(--accent-orange), var(--accent-green), var(--accent-orange), var(--accent-green)); /* Burnt Orange Gradient */
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
             background-size: 400% 400%;
             animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(249, 168, 37, 0.5), 0 0 40px rgba(249, 168, 37, 0.5); /* Matching box-shadow */
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5); /* Matching box-shadow */
             z-index: -1;
         }
 
         .profile-stats-overlay:hover {
             opacity: 1;
-            transform: translate(-300px, -50%); /* Maintain shift on hover */
+            transform: translateY(-50%);
             pointer-events: auto;
         }
 
@@ -642,10 +706,10 @@
         /* Profile Stat Paragraph */
         .stat-paragraph {
             width: 100%;
-            color: rgba(250, 250, 250, 0.8); /* Soft White with transparency */
+            color: rgba(255, 255, 255, 0.8); /* White with transparency */
             text-shadow: 
-                0 0 3px rgba(249, 168, 37, 0.8),
-                0 0 6px rgba(249, 168, 37, 0.5);
+                0 0 3px rgba(0, 183, 255, 0.8),
+                0 0 6px rgba(0, 183, 255, 0.5);
             font-weight: 500;
             letter-spacing: 0.5px;
             font-family: 'Courier New', monospace;
@@ -675,17 +739,17 @@
             position: relative;
             z-index: 3;
             background: rgba(0, 29, 60, 0.4);
-            border: 1px solid rgba(249, 168, 37, 0.1);
+            border: 1px solid rgba(0, 123, 255, 0.1);
             padding: 1.5rem;
             border-radius: 15px;
             box-shadow: 
-                inset 0 0 40px rgba(249, 168, 37, 0.08),
-                0 0 30px rgba(0, 0, 0, 0.15);
+                inset 0 0 40px rgba(0, 123, 255, 0.08),
+                0 0 20px rgba(0, 0, 0, 0.15);
             margin-top: 1rem;
         }
 
         .about-content p {
-            color: rgba(250, 250, 250, 0.9); /* Soft White */
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1.15rem;
             line-height: 2;
             text-align: justify;
@@ -697,15 +761,15 @@
         }
 
         .about-content p:hover {
-            text-shadow: 0 0 8px rgba(249, 168, 37, 0.8);
+            text-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
             letter-spacing: 0.2px;
-            background: rgba(249, 168, 37, 0.05);
+            background: rgba(0, 123, 255, 0.05);
             transform: scale(1.01);
         }
 
         .about-content p:first-of-type {
             font-size: 1.25rem;
-            color: rgba(250, 250, 250, 0.95);
+            color: rgba(255, 255, 255, 0.95);
             font-weight: 500;
         }
 
@@ -714,7 +778,7 @@
             display: none; /* Hidden initially */
             margin-top: 1rem;
             padding: 10px 20px;
-            background: var(--accent-orange); /* Burnt Orange */
+            background: rgba(65, 105, 225, 0.9); /* Royal Blue with opacity */
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -725,7 +789,7 @@
         }
 
         .want-know-more-btn:hover {
-            background: var(--accent-yellow); /* Mustard Yellow on hover */
+            background: rgba(30, 144, 255, 0.95); /* Dodger Blue on hover */
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
@@ -787,25 +851,19 @@
         @keyframes titlePulse {
             0% {
                 text-shadow: 
-                    0 0 10px rgba(249, 168, 37, 0.3),
-                    0 0 20px rgba(249, 168, 37, 0.2);
+                    0 0 10px rgba(0, 183, 255, 0.3),
+                    0 0 20px rgba(0, 183, 255, 0.2);
             }
             100% {
                 text-shadow: 
-                    0 0 15px rgba(249, 168, 37, 0.5),
-                    0 0 30px rgba(249, 168, 37, 0.3);
+                    0 0 15px rgba(0, 183, 255, 0.5),
+                    0 0 30px rgba(0, 183, 255, 0.3);
             }
         }
 
         @keyframes glowPulse {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
-        }
-
-        @keyframes gradientAnimationInfographic {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         /* Infographics Cycling Animation */
@@ -833,10 +891,10 @@
             bottom: -10px;
             border: 2px solid transparent;
             border-radius: 15px;
-            background: linear-gradient(45deg, var(--accent-orange), var(--accent-green), var(--accent-orange), var(--accent-green)); /* Burnt Orange Gradient */
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-dark-blue), var(--accent-blue), var(--accent-dark-blue)); /* Royal Blue Gradient */
             background-size: 400% 400%;
             animation: gradientAnimationInfographic 15s ease infinite; /* Animated gradient */
-            box-shadow: 0 0 20px rgba(249, 168, 37, 0.5), 0 0 40px rgba(249, 168, 37, 0.5);
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 40px rgba(0, 123, 255, 0.5);
         }
 
         .infographic-item {
@@ -861,7 +919,7 @@
         .infographic-item h4 {
             margin-bottom: 0.5rem;
             color: #fff;
-            text-shadow: 0 0 10px rgba(249, 168, 37, 0.3);
+            text-shadow: 0 0 10px rgba(0, 183, 255, 0.5);
             text-align: center;
             width: 100%;
             font-size: 1.5rem;
@@ -870,7 +928,7 @@
         }
 
         .infographic-item p {
-            color: rgba(250, 250, 250, 0.8);
+            color: rgba(255, 255, 255, 0.8);
             text-align: center;
             font-size: 1rem;
             width: 100%;
@@ -901,34 +959,35 @@
 
         /* Card Styling */
         .card {
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-yellow) 100%);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
             box-shadow: 
                 0 10px 30px rgba(0, 0, 0, 0.3),
-                0 0 20px rgba(249, 168, 37, 0.2);
+                0 0 20px rgba(255, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
+            z-index: 2; /* Ensure cards are above lower sections */
         }
 
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 
                 0 15px 40px rgba(0, 0, 0, 0.4),
-                0 0 30px rgba(249, 168, 37, 0.3);
+                0 0 30px rgba(255, 0, 0, 0.3);
         }
 
         .card h3 {
-            color: var(--accent-orange); /* Burnt Orange */
+            color: var(--accent-blue);
             margin-bottom: 1.5rem;
             font-size: 1.8rem;
             position: relative;
             display: inline-block;
-            text-shadow: 0 0 15px rgba(249, 168, 37, 0.3);
+            text-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
             /* Removed the ::after pseudo-element */
         }
 
@@ -941,7 +1000,7 @@
         }
 
         .project-card {
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-yellow) 100%);
+            background: rgba(20, 30, 50, 0.95);
             border-radius: 15px;
             padding: 1.5rem;
             text-decoration: none;
@@ -949,7 +1008,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 168, 37, 0.2);
+            border: 1px solid rgba(255, 60, 0, 0.2);
             backdrop-filter: blur(5px);
         }
 
@@ -963,7 +1022,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(249, 168, 37, 0.2),
+                rgba(255, 60, 0, 0.2),
                 transparent
             );
             transition: 0.5s;
@@ -977,19 +1036,19 @@
             transform: translateY(-5px) scale(1.02);
             box-shadow: 
                 0 10px 25px rgba(0, 0, 0, 0.3),
-                0 0 20px rgba(249, 168, 37, 0.2);
+                0 0 20px rgba(0, 123, 255, 0.2);
         }
 
         .project-card h4 {
             color: #fff;
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px rgba(249, 168, 37, 0.3);
+            text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
             border: none; /* No border */
         }
 
         .project-card p {
-            color: rgba(250, 250, 250, 0.7);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 1rem;
         }
 
@@ -1000,11 +1059,12 @@
             gap: 2rem;
             margin-top: 2rem;
             padding: 1rem;
-            background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+            background: rgba(20, 30, 50, 0.9);
             border-radius: 15px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 168, 37, 0.2);
+            border: 1px solid rgba(255, 60, 0, 0.2);
+            z-index: 2; /* Ensure it's above lower sections */
         }
 
         .social-link {
@@ -1014,7 +1074,7 @@
             letter-spacing: 2px;
             text-decoration: none;
             padding: 10px 20px;
-            background: rgba(255, 168, 37, 0.1);
+            background: rgba(255, 60, 0, 0.1);
             border-radius: 5px;
             overflow: hidden;
             transition: all 0.3s ease;
@@ -1030,7 +1090,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(249, 168, 37, 0.2),
+                rgba(255, 60, 0, 0.2),
                 transparent
             );
             transition: 0.5s;
@@ -1041,9 +1101,9 @@
         }
 
         .social-link:hover {
-            background: rgba(249, 168, 37, 0.2);
+            background: rgba(255, 60, 0, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(249, 168, 37, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 60, 0, 0.2);
         }
 
         /* Responsive Design */
@@ -1343,8 +1403,8 @@
             color: var(--code-red);
         }
 
-        .random-char.yellow {
-            color: var(--code-yellow);
+        .random-char.blue {
+            color: var(--code-blue);
         }
 
         @keyframes fadeInOut {
@@ -1383,7 +1443,7 @@
             display: none; /* Hidden initially */
             margin-top: 1rem;
             padding: 10px 20px;
-            background: var(--accent-orange); /* Burnt Orange */
+            background: rgba(65, 105, 225, 0.9); /* Royal Blue with opacity */
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -1394,7 +1454,7 @@
         }
 
         .want-know-more-btn:hover {
-            background: var(--accent-yellow); /* Mustard Yellow on hover */
+            background: rgba(30, 144, 255, 0.95); /* Dodger Blue on hover */
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
@@ -1456,13 +1516,13 @@
         @keyframes titlePulse {
             0% {
                 text-shadow: 
-                    0 0 10px rgba(249, 168, 37, 0.3),
-                    0 0 20px rgba(249, 168, 37, 0.2);
+                    0 0 10px rgba(0, 183, 255, 0.3),
+                    0 0 20px rgba(0, 183, 255, 0.2);
             }
             100% {
                 text-shadow: 
-                    0 0 15px rgba(249, 168, 37, 0.5),
-                    0 0 30px rgba(249, 168, 37, 0.3);
+                    0 0 15px rgba(0, 183, 255, 0.5),
+                    0 0 30px rgba(0, 183, 255, 0.3);
             }
         }
 
@@ -1482,7 +1542,7 @@
         <!-- GitHub Icon within Navbar -->
         <a href="https://github.com/FotiosMpouris" target="_blank" rel="noopener noreferrer" title="Visit my GitHub Homepage">
             <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12,0.297C5.373,0.297,0,5.67,0,12.297c0,5.302,3.438,9.8,8.205,11.387c0.6,0.113,0.82-0.258,0.82-0.577
+                <path fill="currentColor" d="M12,0.297C5.373,0.297,0,5.67,0,12.297c0,5.302,3.438,9.8,8.205,11.387c0.6,0.113,0.82-0.258,0.82-0.577
                 c0-0.285-0.01-1.04-0.015-2.04c-3.338,0.724-4.042-1.61-4.042-1.61c-0.546-1.385-1.333-1.754-1.333-1.754
                 c-1.089-0.744,0.084-0.729,0.084-0.729c1.205,0.084,1.84,1.236,1.84,1.236c1.07,1.835,2.807,1.305,3.495,0.997
                 c0.108-0.776,0.42-1.305,0.763-1.605c-2.665-0.303-5.466-1.333-5.466-5.931c0-1.31,0.47-2.381,1.236-3.221
@@ -1515,53 +1575,187 @@
             <h1 class="title">Fotios Mpouris</h1>
             <h2 class="subtitle">2D & 3D Artist / Animator / Developer</h2>
             
-            <!-- Skills Container with Links -->
+            <!-- Skills Container with Popups -->
             <div class="skills-container">
-                <a href="https://developer.android.com" target="_blank" class="skill-icon">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android">
-                </a>
-                <a href="https://www.blender.org/" target="_blank" class="skill-icon">
-                    <img src="https://download.blender.org/branding/community/blender_community_badge_white.svg" alt="blender">
-                </a>
-                <a href="https://www.w3schools.com/cs/" target="_blank" class="skill-icon">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp">
-                </a>
-                <a href="https://dotnet.microsoft.com/" target="_blank" class="skill-icon">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" alt="dotnet">
-                </a>
-                <a href="https://cloud.google.com" target="_blank" class="skill-icon">
-                    <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" alt="gcp">
-                </a>
-                <a href="https://www.w3.org/html/" target="_blank" class="skill-icon">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5">
-                </a>
-                <a href="https://www.adobe.com/in/products/illustrator.html" target="_blank" class="skill-icon">
-                    <img src="https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg" alt="illustrator">
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="skill-icon">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript">
-                </a>
-                <a href="https://nodejs.org" target="_blank" class="skill-icon">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs">
-                </a>
-                <a href="https://www.photoshop.com/en" target="_blank" class="skill-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg" alt="photoshop">
-                </a>
-                <a href="https://www.python.org" target="_blank" class="skill-icon">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python">
-                </a>
-                <a href="https://unity.com/" target="_blank" class="skill-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg" alt="unity">
-                </a>
-                <a href="https://zapier.com" target="_blank" class="skill-icon">
-                    <img src="https://www.vectorlogo.zone/logos/zapier/zapier-icon.svg" alt="zapier">
-                </a>
-                <a href="https://www.adobe.com/products/premiere.html" target="_blank" class="skill-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" alt="premiere pro">
-                </a>
-                <a href="https://www.adobe.com/products/aftereffects.html" target="_blank" class="skill-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" alt="after effects">
-                </a>
+                <!-- Skill 1: Android -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="Android" data-info1="Developed interactive features for geo-positioning mobile applications, enhancing user engagement and functionality on Android platforms." data-info2="Collaborated with cross-functional teams to integrate Android-specific features, ensuring seamless performance and user experience.">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 2: Blender -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="Blender" data-info1="Created detailed 3D models and animations using Blender, contributing to multimedia content and enhancing visual appeal in various projects." data-info2="Implemented character rigging and animation workflows in Blender, bringing digital assets to life with realistic movements.">
+                        <img src="https://download.blender.org/branding/community/blender_community_badge_white.svg" alt="blender">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 3: C# -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="C#" data-info1="Programmed robust C# scripts in Unity to implement game mechanics and optimize performance, driving seamless user experiences in mobile gaming applications." data-info2="Developed scalable C# applications, ensuring efficient performance and reliability across multiple projects.">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 4: .NET (Dotnet) -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill=".NET (Dotnet)" data-info1="Utilized .NET framework for developing scalable and efficient applications, integrating with Unity projects to enhance functionality and user interactions." data-info2="Implemented backend services using .NET, facilitating smooth data management and application performance.">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" alt="dotnet">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 5: GCP (Google Cloud Platform) -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="GCP (Google Cloud Platform)" data-info1="Managed Google Cloud Console resources to deploy and maintain scalable applications, ensuring high performance and reliability for multimedia and gaming projects." data-info2="Optimized cloud infrastructure on GCP, reducing operational costs by 15% while maintaining application efficiency.">
+                        <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" alt="gcp">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 6: HTML5 -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="HTML5" data-info1="Designed and developed responsive web interfaces using HTML5, improving user experience and accessibility for project-related websites and applications." data-info2="Integrated HTML5 with CSS and JavaScript to build interactive web components, enhancing site functionality and engagement.">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 7: Illustrator -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="Illustrator" data-info1="Created visually compelling graphics and design elements with Adobe Illustrator, enhancing branding materials and multimedia content for social media and outreach programs." data-info2="Designed custom logos and templates in Illustrator, strengthening brand identity and visual consistency across projects.">
+                        <img src="https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg" alt="illustrator">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 8: JavaScript -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="JavaScript" data-info1="Implemented dynamic web functionalities using JavaScript, enhancing interactivity and user engagement on project websites and digital platforms." data-info2="Developed interactive UI components with JavaScript, improving overall user experience and site responsiveness.">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 9: Node.js -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="Node.js" data-info1="Developed backend services with Node.js for interactive applications, ensuring efficient data handling and seamless integration with frontend components." data-info2="Optimized server-side performance using Node.js, reducing response times by 20% and enhancing application scalability.">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 10: Photoshop -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="Photoshop" data-info1="Produced high-quality multimedia content and graphics using Adobe Photoshop, boosting engagement and visual appeal for social media and training materials." data-info2="Edited images and created visual assets in Photoshop, supporting effective communication and marketing efforts.">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg" alt="photoshop">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 11: Python -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="Python" data-info1="Developed Python-based applications for AI-assisted generative art platforms, streamlining creative processes and enhancing project innovation." data-info2="Automated data processing tasks with Python, increasing efficiency and accuracy in project workflows.">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 12: Unity -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="Unity" data-info1="Led Unity development efforts, creating immersive 2D and 3D interactive features for mobile applications, and managing alpha testing to ensure product stability." data-info2="Collaborated with the CTO to design and implement game mechanics in Unity, resulting in a seamless and engaging user experience.">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg" alt="unity">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 13: Zapier -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="Zapier" data-info1="Automated workflows and integrated various applications using Zapier, enhancing team productivity and streamlining project management processes." data-info2="Implemented Zapier integrations to connect disparate tools, reducing manual tasks and improving operational efficiency.">
+                        <img src="https://www.vectorlogo.zone/logos/zapier/zapier-icon.svg" alt="zapier">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 14: Premiere Pro -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="Premiere Pro" data-info1="Edited engaging video content with Adobe Premiere Pro, improving training materials and multimedia communication efforts for volunteer and client support programs." data-info2="Produced high-quality video presentations in Premiere Pro, enhancing the effectiveness of outreach and training initiatives.">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/premierepro/premierepro-original.svg" alt="premiere pro">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
+                
+                <!-- Skill 15: After Effects -->
+                <div class="skill-wrapper">
+                    <div class="skill-icon" data-skill="After Effects" data-info1="Designed motion graphics and animated content using Adobe After Effects, elevating the quality of multimedia projects and enhancing visual storytelling." data-info2="Created dynamic animations in After Effects, adding visual flair and professional polish to video content.">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg" alt="after effects">
+                    </div>
+                    <div class="popup">
+                        <p class="info1"></p>
+                        <p class="info2"></p>
+                        <p class="stat"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1582,21 +1776,21 @@
 
                             <!-- Updated Hover Button -->
                             <button class="profile-hover-button">Stats</button>
-
-                            <div class="profile-stats-overlay">
-                                <div class="stats-cycler">
-                                    <div class="stat-paragraph">
-                                        <p></p>
-                                    </div>
-                                    <div class="stat-paragraph">
-                                        <p></p>
-                                    </div>
-                                    <div class="stat-paragraph">
-                                        <p></p>
-                                    </div>
-                                    <div class="stat-paragraph">
-                                        <p></p>
-                                    </div>
+                        </div>
+                        <!-- Profile Stats Overlay positioned to the right of infographic -->
+                        <div class="profile-stats-overlay">
+                            <div class="stats-cycler">
+                                <div class="stat-paragraph">
+                                    <p></p>
+                                </div>
+                                <div class="stat-paragraph">
+                                    <p></p>
+                                </div>
+                                <div class="stat-paragraph">
+                                    <p></p>
+                                </div>
+                                <div class="stat-paragraph">
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -1757,7 +1951,7 @@
             const totalStats = statsData.length;
 
             // Function to type text into an element using GSAP TextPlugin
-            function typeText(element, text, speed = 0.05) { // Speed adjusted for fast typing
+            function typeText(element, text, speed = 0.02) { // Increased speed
                 return gsap.to(element, {
                     duration: text.length * speed,
                     text: text,
@@ -1778,13 +1972,13 @@
                 statsData.forEach((text, index) => {
                     const currentParagraph = paragraphs[index % paragraphs.length];
                     timeline.call(() => {
-                        typeText(currentParagraph.querySelector('p'), text, 0.05);
+                        typeText(currentParagraph.querySelector('p'), text, 0.02); // Increased speed
                     }, null, `+=0.5`); // Delay before starting each paragraph
-                    timeline.to({}, { duration: text.length * 0.05 + 1.5 }); // Wait for typing and display duration
+                    timeline.to({}, { duration: text.length * 0.02 + 1.5 }); // Wait for typing and display duration
                     timeline.call(() => {
                         currentParagraph.classList.remove('active');
                         currentParagraph.querySelector('p').textContent = '';
-                    }, null);
+                    });
                 });
 
                 // Repeat the cycle infinitely
@@ -1902,7 +2096,7 @@
         let infographicItems = [];
 
         // Function to type text into an element using GSAP TextPlugin
-        function typeTextInfographic(element, text, speed = 0.05) { // Speed adjusted for fast typing
+        function typeTextInfographic(element, text, speed = 0.02) { // Increased speed
             return gsap.to(element, {
                 duration: text.length * speed,
                 text: text,
@@ -1923,10 +2117,10 @@
                 const currentItem = infographicItems[index % infographicItems.length];
                 timeline.call(() => {
                     currentItem.classList.add('active');
-                    typeTextInfographic(currentItem.querySelector('h4'), item.title, 0.05);
-                    typeTextInfographic(currentItem.querySelector('.typing-text'), item.text, 0.05);
+                    typeTextInfographic(currentItem.querySelector('h4'), item.title, 0.02); // Increased speed
+                    typeTextInfographic(currentItem.querySelector('.typing-text'), item.text, 0.02); // Increased speed
                 });
-                timeline.to({}, { duration: (item.title.length + item.text.length) * 0.05 + 1.5 }); // Wait for typing and display duration
+                timeline.to({}, { duration: (item.title.length + item.text.length) * 0.02 + 1.5 }); // Wait for typing and display duration
                 timeline.call(() => {
                     currentItem.classList.remove('active');
                     currentItem.querySelector('h4').textContent = '';
@@ -1978,7 +2172,7 @@
                 randomStarElem.className = 'random-char';
 
                 // Randomly assign one of the three colors
-                const colors = ['white', 'red', 'yellow'];
+                const colors = ['white', 'red', 'blue'];
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 randomStarElem.classList.add(randomColor);
 
@@ -1998,6 +2192,22 @@
                     randomStarElem.remove();
                 });
             }
+        }
+
+        // Function to type text into a paragraph and return a Promise
+        function typeParagraph(para, fullText, speed = 0.02) { // Increased speed
+            return new Promise((resolve) => {
+                para.textContent = ''; // Clear existing text
+                gsap.to(para, {
+                    duration: fullText.length * speed,
+                    text: fullText,
+                    ease: "none",
+                    onStart: () => {
+                        para.style.opacity = '1';
+                    },
+                    onComplete: resolve
+                });
+            });
         }
 
         // Initialize Everything
@@ -2037,9 +2247,97 @@
                 delay: 0.8
             });
 
-            // Skill Icons Animation
-            const skillIcons = document.querySelectorAll('.skill-icon');
-            skillIcons.forEach((icon, index) => {
+            // Skill Icons Animation and Popup Functionality
+            const skillWrappers = document.querySelectorAll('.skill-wrapper');
+            skillWrappers.forEach((wrapper, index) => {
+                const icon = wrapper.querySelector('.skill-icon');
+                const popup = wrapper.querySelector('.popup');
+                const info1 = icon.getAttribute('data-info1');
+                const info2 = icon.getAttribute('data-info2');
+
+                // Function to generate random stat
+                function generateRandomStat() {
+                    const efficiency = Math.floor(Math.random() * 11) + 85; // 85 to 95
+                    return `Efficiency: ${efficiency}%`;
+                }
+
+                // Function to show popup
+                function showPopup() {
+                    // Hide other popups
+                    document.querySelectorAll('.popup').forEach(p => {
+                        if (p !== popup) {
+                            p.classList.remove('active');
+                            p.querySelectorAll('p').forEach(pElem => {
+                                pElem.textContent = '';
+                            });
+                        }
+                    });
+
+                    popup.classList.add('active');
+
+                    const para1 = popup.querySelector('.info1');
+                    const para2 = popup.querySelector('.info2');
+                    const stat = popup.querySelector('.stat');
+
+                    // Generate random stat
+                    const randomStat = generateRandomStat();
+
+                    // Type out the first bullet point
+                    gsap.to(para1, {
+                        duration: info1.length * 0.02, // Increased speed
+                        text: info1,
+                        ease: "none",
+                        onStart: () => {
+                            para1.style.opacity = '1';
+                        },
+                        onComplete: () => {
+                            // Type out the second bullet point
+                            gsap.to(para2, {
+                                duration: info2.length * 0.02, // Increased speed
+                                text: info2,
+                                ease: "none",
+                                onStart: () => {
+                                    para2.style.opacity = '1';
+                                },
+                                onComplete: () => {
+                                    // Type out the random stat
+                                    gsap.to(stat, {
+                                        duration: randomStat.length * 0.02, // Increased speed
+                                        text: randomStat,
+                                        ease: "none",
+                                        onStart: () => {
+                                            stat.style.opacity = '1';
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+
+                // Function to hide popup
+                function hidePopup() {
+                    popup.classList.remove('active');
+                    popup.querySelectorAll('p').forEach(pElem => {
+                        pElem.textContent = '';
+                    });
+                }
+
+                // Event listeners for hover on the wrapper to prevent shaking
+                wrapper.addEventListener('mouseenter', showPopup);
+                wrapper.addEventListener('mouseleave', hidePopup);
+
+                // Event listeners for click
+                wrapper.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default link behavior
+                    if (popup.classList.contains('active')) {
+                        hidePopup();
+                    } else {
+                        showPopup();
+                    }
+                });
+
+                // Initial GSAP animation for skill icons
                 gsap.to(icon, {
                     opacity: 1,
                     scale: 1,
@@ -2104,26 +2402,10 @@
             const paragraphs = Array.from(aboutContent);
             let currentParagraphIndex = 0;
 
-            // Function to type text into a paragraph and return a Promise
-            function typeParagraph(para, fullText, speed = 0.01) {
-                return new Promise((resolve) => {
-                    para.textContent = ''; // Clear existing text
-                    gsap.to(para, {
-                        duration: fullText.length * speed,
-                        text: fullText,
-                        ease: "none",
-                        onStart: () => {
-                            para.style.opacity = '1';
-                        },
-                        onComplete: resolve
-                    });
-                });
-            }
-
             // Type the first paragraph and then show the button
             const firstParagraph = paragraphs[0];
             const firstText = firstParagraph.getAttribute('data-text');
-            typeParagraph(firstParagraph, firstText, 0.01).then(() => {
+            typeParagraph(firstParagraph, firstText, 0.02).then(() => { // Increased speed
                 const moreBtn = document.getElementById('more-btn');
                 moreBtn.style.display = 'inline-block'; // Show the button
                 gsap.fromTo(moreBtn, { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.2 });
@@ -2142,7 +2424,7 @@
                 for(let i = 1; i < paragraphs.length; i++) {
                     const para = paragraphs[i];
                     const fullText = para.getAttribute('data-text');
-                    await typeParagraph(para, fullText, 0.01);
+                    await typeParagraph(para, fullText, 0.02); // Increased speed
                 }
             });
         });
